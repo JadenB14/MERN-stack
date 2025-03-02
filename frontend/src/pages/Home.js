@@ -11,8 +11,11 @@ const Home = () => {
 
     useEffect(() => {
         const fetchWorkouts = async () => {
-            const response = await fetch('/api/workouts')
+
+            const response = await fetch('/api/workouts/', {mode: 'no-cors'})
             const json = await response.json();
+
+            console.log("Response: ", JSON.stringify(response))
 
             if (response.ok) {
                 dispatch({type: 'SET_WORKOUTS', payload: json})

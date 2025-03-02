@@ -1,0 +1,50 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    networks:
+      - mern-app
+    volumes:
+      - data:/var/lib/mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=password
+
+  backend:
+    build: ./backend
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - PORT=${PORT}
+    ports:
+      - '4000:4000'
+    volumes:
+      - ./backend:/app
+      - ./:/node_modules
+    networks:
+      - mern-app
+
+  frontend:
+    build: ./frontend
+    stdin_open: true
+    environment:
+      - PORT=3000
+    depends_on:
+      - backend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/app
+      - ./:/node_modules
+    networks:
+      - mern-app
+
+volumes:
+  data:
+
+
+networks:
+  mern-app:
