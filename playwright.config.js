@@ -28,7 +28,7 @@ export default defineConfig({
   webServer: [
     {
       command: 'npm run start:backend', // Start backend API
-      port: 5000,
+      port: 4000,
       timeout: 120000,
       reuseExistingServer: true,
     },
