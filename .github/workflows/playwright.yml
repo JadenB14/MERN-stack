@@ -1,15 +1,24 @@
 name: Playwright Tests
-on: [push, pull_request]
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Install dependencies
         run: npm install
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps  # ✅ This installs required browser binaries
 
       - name: Run Playwright Tests
         run: npm run test
