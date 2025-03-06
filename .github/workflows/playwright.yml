@@ -23,6 +23,7 @@ jobs:
         run: npm run start:backend &
         env:
           CI: true
+          MONGO_URI: "mongodb+srv://jadenbolton14:Marlo6872@testcluster.hincty3.mongodb.net/mydatabase?retryWrites=true&w=majority&appName=TestCluster"
 
       - name: Start React Frontend
         run: npm --prefix frontend start &
