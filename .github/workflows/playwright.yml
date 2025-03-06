@@ -10,19 +10,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install dependencies
+      - name: Install Backend Dependencies
         run: npm install
+
+      - name: Install Frontend Dependencies
+        run: npm install --prefix frontend
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Start React App
-        run: npm start &
+      - name: Start Backend API
+        run: npm run start:backend &
         env:
           CI: true
 
-      - name: Wait for React App to be Ready
-        run: npx wait-on http://localhost:3000
+      - name: Start React Frontend
+        run: npm --prefix frontend start &
+        env:
+          CI: true
+
+      - name: Wait for Services
+        run: npx wait-on http://localhost:3000 http://localhost:5000
 
       - name: Run Playwright Tests
         run: npm run test
