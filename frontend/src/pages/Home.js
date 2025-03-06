@@ -12,14 +12,22 @@ const Home = () => {
     useEffect(() => {
         const fetchWorkouts = async () => {
 
-            const response = await fetch('/api/workouts/', {mode: 'no-cors'})
+        try {
+            const response = await fetch("http://localhost:4000/api/workouts/")
+            
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+            
+        
             const json = await response.json();
 
-            console.log("Response: ", JSON.stringify(response))
+            console.log("Workouts: ", json)
 
-            if (response.ok) {
                 dispatch({type: 'SET_WORKOUTS', payload: json})
-            }
+            } catch (error) {
+                console.error("Fetch Error: ", error)
+            } 
         }
 
         fetchWorkouts()
