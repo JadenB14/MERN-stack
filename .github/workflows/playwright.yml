@@ -23,7 +23,7 @@ jobs:
         run: npm run start:backend &
         env:
           CI: true
-
+          MONGO_URI: ${{ secrets.MONGO_URI }}
 
       - name: Start React Frontend
         run: npm --prefix frontend start &
