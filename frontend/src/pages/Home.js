@@ -35,7 +35,7 @@ const Home = () => {
 
     return(
         <div className="home">
-            <div className="workouts">
+            <div title="workouts" className="workouts">
                 {workouts && workouts.map((workout) => {
                     return <WorkoutDetails key={workout._id} workout={workout}/>
                 })}    

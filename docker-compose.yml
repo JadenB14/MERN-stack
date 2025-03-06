@@ -29,6 +29,13 @@ services:
       - ./:/node_modules
     networks:
       - mern-app
+      
+  tests:
+    build: ./
+    container_name: test_runner
+    depends_on:
+      - backend
+      - frontend
 
 volumes:
   data:

@@ -52,6 +52,7 @@ const WorkoutForm = () => {
             <label>Excersize Title:</label>
             <input 
                 type='text'
+                title="excersize-name"
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
                 className={emptyFields.includes('title') ? 'error' : ''}
@@ -60,6 +61,7 @@ const WorkoutForm = () => {
             <label>Weight (in lbs):</label>
             <input 
                 type='number'
+                title="weight"
                 onChange={(e) => setWeight(e.target.value)}
                 value={weight}
                 className={emptyFields.includes('weight') ? 'error' : ''}
@@ -68,6 +70,7 @@ const WorkoutForm = () => {
             <label>Amount of Reps: </label>
             <input 
                 type='number'
+                title="reps"
                 onChange={(e) => setReps(e.target.value)}
                 value={reps}
                 className={emptyFields.includes('reps') ? 'error' : ''}
