@@ -32,7 +32,10 @@ services:
       
   tests:
     build: ./
-    container_name: test_runner
+    container_name: test_runner 
+    network_mode: "host"
+    ports:
+      - 8080:8080
     depends_on:
       - backend
       - frontend

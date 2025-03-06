@@ -11,8 +11,11 @@ RUN npm install
 # Copy application and tests
 COPY . .
 
+RUN npx playwright install
+
 # Expose necessary ports
-EXPOSE 3000
+EXPOSE 8080
 
 # Run tests
-CMD ["npm","run","test"]
+CMD sleep 5 && \
+  npm run test
