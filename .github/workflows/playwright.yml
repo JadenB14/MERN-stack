@@ -14,7 +14,15 @@ jobs:
         run: npm install
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps  # ✅ This installs required browser binaries
+        run: npx playwright install --with-deps
+
+      - name: Start React App
+        run: npm start &
+        env:
+          CI: true
+
+      - name: Wait for React App to be Ready
+        run: npx wait-on http://localhost:3000
 
       - name: Run Playwright Tests
         run: npm run test
