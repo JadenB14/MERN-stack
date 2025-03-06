@@ -25,10 +25,20 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['html', {outputFolder: 'playwright-report', open:'never'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  webServer: {
-    command: 'npm run start',
-    url: 'http://localhost:3000',
-  },
+  webServer: [
+    {
+      command: 'npm run start:backend', // Start backend API
+      port: 5000,
+      timeout: 120000,
+      reuseExistingServer: true,
+    },
+    {
+      command: 'npm --prefix frontend start', // Start React frontend from 'frontend/' folder
+      port: 3000,
+      timeout: 120000,
+      reuseExistingServer: true,
+    }
+  ],
   use: {
     headless: true,
     /* Base URL to use in actions like `await page.goto('/')`. */
