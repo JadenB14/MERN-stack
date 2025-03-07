@@ -28,7 +28,7 @@ mongoose.connect(MONGO_URI)
 //routes
 app.use('/api/workouts', workoutRoutes)
 
-app.get("/api/workouts/", (req, res) => {
+app.get("/", (req, res) => {
 	res.send("Backend is running!")
 })
 
