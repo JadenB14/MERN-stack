@@ -31,16 +31,15 @@ jobs:
         id: ip
         run: echo "PUBLIC_IP=$(curl -s ifconfig.me)" >> $GITHUB_ENV
 
-      - name: Add GitHub Actions IP to MongoDB Atlas
+      - name: Whitelist GitHub Actions IP in MongoDB Atlas
         run: |
-          curl --user "jadenbolton14:${{ secrets.API_KEY }}" \
-          --digest \
-          --header "Content-Type: application/json" \
-          --request POST \
-          --data "{\"ipAddress\": \"${{ env.PUBLIC_IP }}\"}" \
-          "https://cloud.mongodb.com/api/atlas/v1.0/groups/YOUR_PROJECT_ID/accessList"
+          curl -X POST "https://cloud.mongodb.com/api/atlas/v1.0/groups/${{ secrets.MONGO_PROJECT_ID }}/accessList" \
+            --user "${{ secrets.MONGO_ATLAS_PUBLIC_KEY }}:${{ secrets.MONGO_ATLAS_PRIVATE_KEY }}" \
+            --digest \
+            --header "Accept: application/json" \
+            --header "Content-Type: application/json" \
+            --data "{ \"ipAddress\": \"${{ env.PUBLIC_IP }}\", \"comment\": \"GitHub Actions Runner\" }"
 
-          
 
       - name: Start Backend API
         run: nohup npm run start:backend > backend.log 2>&1 &
