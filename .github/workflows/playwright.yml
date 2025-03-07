@@ -41,6 +41,8 @@ jobs:
       - name: Check if Frontend is Running
         run: curl -I http://localhost:3000 || exit 1
         
+      - name: Check if Backend is Running
+        run: curl -I http://localhost:4000 || exit 1
 
       - name: Wait for Services
         run: npx wait-on http://localhost:3000 http://localhost:4000
