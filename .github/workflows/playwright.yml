@@ -15,15 +15,17 @@ jobs:
         with: 
           node-version: lts/*
 
-
-      - name: Install Playwright Browsers      
-        run: npx playwright install --with-deps
+      - name: Install Root Dependencies
+        run: npm install
 
       - name: Install Frontend Dependencies
         run: npm install --prefix frontend
 
       - name: Install Backend Dependencies
         run: npm install --prefix backend
+
+      - name: Install Playwright Browsers      
+        run: npx playwright install --with-deps
 
       - name: Start Backend API
         run: npm run start:backend &
