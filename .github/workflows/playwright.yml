@@ -28,7 +28,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Start Backend API
-        run: npm run start:backend &
+        run: nohup npm run start:backend > backend.log 2>&1 &
         env:
           CI: true
           MONGO_URI: "mongodb+srv://jadenbolton14:Marlo6872@testcluster.hincty3.mongodb.net/mydatabase?retryWrites=true&w=majority&appName=TestCluster"
