@@ -29,7 +29,7 @@ export default defineConfig({
     {
       command: 'npm run start:backend', // Start backend API
       port: 4000,
-      timeout: 120000,
+      timeout: 180000,
       reuseExistingServer: true,
       env: {
         "MONGO_URI": "mongodb+srv://jadenbolton14:Marlo6872@testcluster.hincty3.mongodb.net/mydatabase?retryWrites=true&w=majority&appName=TestCluster"
@@ -38,7 +38,7 @@ export default defineConfig({
     {
       command: 'npm --prefix frontend start', // Start React frontend from 'frontend/' folder
       port: 3000,
-      timeout: 120000,
+      timeout: 180000,
       reuseExistingServer: true,
     }
   ],
