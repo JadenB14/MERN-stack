@@ -19,10 +19,10 @@ jobs:
         run: npm install
 
       - name: Install Frontend Dependencies
-        run: npm install --prefix frontend
+        run: npm run install:frontend
 
       - name: Install Backend Dependencies
-        run: npm install --prefix backend
+        run: npm run install:backend
 
       - name: Install Playwright Browsers      
         run: npx playwright install --with-deps
@@ -34,9 +34,12 @@ jobs:
           MONGO_URI: "mongodb+srv://jadenbolton14:Marlo6872@testcluster.hincty3.mongodb.net/mydatabase?retryWrites=true&w=majority&appName=TestCluster"
 
       - name: Start React Frontend
-        run: npm --prefix frontend start &
+        run: npm --prefix frontend build &
         env:
           CI: true
+
+      - name: Wait for Services
+        run: npx wait-on http://localhost:3000 http://localhost:5000
 
       - name: Run Playwright Tests
         run: npm run test

@@ -4,6 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
+    "install:frontend": "npm install --prefix frontend",
+    "install:backend": "npm install --prefix backend",
     "start:backend": "node backend/server.js"
   },
   "repository": {
