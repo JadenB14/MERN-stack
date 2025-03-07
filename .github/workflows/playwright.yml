@@ -38,8 +38,10 @@ jobs:
             --digest \
             --header "Accept: application/json" \
             --header "Content-Type: application/json" \
-            --data "{ \"ipAddress\": \"${{ env.PUBLIC_IP }}\", \"comment\": \"GitHub Actions Runner\" }"
-
+            --data '{
+              "ipAddress": "${{ env.PUBLIC_IP }}",
+              "comment": "GitHub Actions Runner"
+            }'
 
       - name: Start Backend API
         run: nohup npm run start:backend > backend.log 2>&1 &
