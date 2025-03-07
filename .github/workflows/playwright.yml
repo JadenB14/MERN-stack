@@ -26,18 +26,27 @@ jobs:
 
       - name: Install Playwright Browsers      
         run: npx playwright install --with-deps
+        
+      - name: Get GitHub Runner IP
+        id: ip
+        run: echo "PUBLIC_IP=$(curl -s ifconfig.me)" >> $GITHUB_ENV
+
+      - name: Add GitHub Actions IP to MongoDB Atlas
+        run: |
+          curl --user "your-atlas-username:your-atlas-api-key" \
+          --digest \
+          --header "Content-Type: application/json" \
+          --request POST \
+          --data "{\"ipAddress\": \"${{ env.PUBLIC_IP }}\"}" \
+          "https://cloud.mongodb.com/api/atlas/v1.0/groups/YOUR_PROJECT_ID/accessList"
+
 
       - name: Start Backend API
         run: nohup npm run start:backend > backend.log 2>&1 &
         env:
           CI: true
-          MONGO_URI: "mongodb+srv://jadenbolton14:Marlo6872@testcluster.hincty3.mongodb.net/mydatabase?retryWrites=true&w=majority&appName=TestCluster"
-          PORT: 4000
-
-      - name: Show Backend Logs (if it fails)
-        if: failure()
-        run: cat backend.log
-        
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          PORT: ${{ secrets.PORT }}
 
       - name: Start React Frontend
         run: npm --prefix frontend start &
