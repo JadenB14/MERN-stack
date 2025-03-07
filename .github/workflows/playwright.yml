@@ -39,7 +39,7 @@ jobs:
           CI: true
 
       - name: Wait for Services
-        run: npx wait-on http://localhost:3000 http://localhost:5000
+        run: npx wait-on http://localhost:3000 http://localhost:4000
 
       - name: Run Playwright Tests
         run: npm run test
