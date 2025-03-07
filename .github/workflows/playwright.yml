@@ -33,7 +33,7 @@ jobs:
 
       - name: Add GitHub Actions IP to MongoDB Atlas
         run: |
-          curl --user "your-atlas-username:your-atlas-api-key" \
+          curl --user "jadenbolton14:${{ secrets.API_KEY }}" \
           --digest \
           --header "Content-Type: application/json" \
           --request POST \
