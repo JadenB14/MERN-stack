@@ -33,6 +33,11 @@ jobs:
           CI: true
           MONGO_URI: "mongodb+srv://jadenbolton14:Marlo6872@testcluster.hincty3.mongodb.net/mydatabase?retryWrites=true&w=majority&appName=TestCluster"
 
+      - name: Show Backend Logs (if it fails)
+        if: failure()
+        run: cat backend.log
+        
+
       - name: Start React Frontend
         run: npm --prefix frontend start &
         env:
